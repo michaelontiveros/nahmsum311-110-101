@@ -106,11 +106,8 @@ vecsum((-1)^(m+1)*qq^(3/2*(m+1)^2+b1*(m+1))*T(b1, bet2, bet3, m, N, qq)) * prod(
 \\ this function tests that we computed the Nahm sum correctly.
 \\ this function should return zero.
 \\ this function is very slow.
-\\ b1, b2, b3 have denominator 2.
 \\ N ~ 20.
-testF(b1, b2, b3, N) = sum(i = 0, N, sum(j = 0, N, sum(k = 0, N, (-1)^(i+j+k) * x^(3/2 * i^2 + j^2/2 + k^2/2 + i * j + i * k + b1 * i + b2 * j + b3 * k) / prod(n = 1, i, 1-(x+O(x^N))^n) / prod(n = 1, j, 1-(x+O(x^N))^n) / prod(n = 1, k, 1-(x+O(x^N))^n)))) - F(b1, b2, b3, N, x + O(x^N));
-
-testFnum(b1, b2, b3, x, N) = sum(i = 0, N, sum(j = 0, N, sum(k = 0, N, (-1)^(i+j+k) * x^(3/2 * i^2 + j^2/2 + k^2/2 + i * j + i * k + b1 * i + b2 * j + b3 * k) / prod(n = 1, i, 1-x^n) / prod(n = 1, j, 1-x^n) / prod(n = 1, k, 1-x^n)))) - F(b1, b2, b3, N, x);
+testF(b1, b2, b3, x, N) = sum(i = 0, N, sum(j = 0, N, sum(k = 0, N, (-1)^(i+j+k) * x^(3/2 * i^2 + j^2/2 + k^2/2 + i * j + i * k + b1 * i + b2 * j + b3 * k) / prod(n = 1, i, 1-x^n) / prod(n = 1, j, 1-x^n) / prod(n = 1, k, 1-x^n)))) - F(b1, b2, b3, N, x);
 
 F2q(b1, b2, b3, N, qq) = F(b1-3*b2+3/2, 1-b2, b3-b2+1/2, N, qq);
 F3q(b1, b2, b3, N, qq) = F(b1-3*b3+3/2, b2-b3+1/2, 1-b3, N, qq);
@@ -141,24 +138,34 @@ G1(b1, b2, b3, N, k) = F1(b1, b2, b3, N, k) * K2(b1, b2, b3) * q(C2(b1,b2,b3)*ta
 G2(b1, b2, b3, N, k) = F2(b1, b2, b3, N, k) * K3(b1, b2, b3) * q(C3(b1,b2,b3)*tau(0,k)) - F3(b1, b2, b3, N, k) * K2(b1, b2, b3) * q(C2(b1,b2,b3)*tau(0,k));
 G3(b1, b2, b3, N, k) = F3(b1, b2, b3, N, k) * K1(b1, b2, b3) * q(C1(b1,b2,b3)*tau(0,k)) - F1(b1, b2, b3, N, k) * K3(b1, b2, b3) * q(C3(b1,b2,b3)*tau(0,k));
 
-\\for(i=-5,5,for(j=-5,5,for(k=-5,5,gtemp = G1(i,j,k,1000,2);if(abs(gtemp)<0.00000000001,print(i,j,k),))));
+\\for(i=0,5,for(j=0,5,for(k=0,5,gtemp = G1(i,j,k,1000,2);if(abs(gtemp)<0.00000000001,print(i,j,k),))));
 \\ returns nothing.
 
-\\for(i=-5,5,for(j=-5,5,for(k=-5,5,gtemp = G2(i,j,k,1000,2);if(abs(gtemp)<0.00000000001,print(i,j,k),))));
+\\for(i=0,5,for(j=0,5,for(k=0,5,gtemp = G2(i,j,k,1000,2);if(abs(gtemp)<0.00000000001,print(i,j,k),))));
 \\ returns everything.
 
-\\for(i=-5,5,for(j=-5,5,for(k=-5,5,gtemp = G3(i,j,k,1000,2);if(abs(gtemp)<0.00000000001,print(i,j,k),))));
+\\for(i=0,5,for(j=0,5,for(k=0,5,gtemp = G3(i,j,k,1000,2);if(abs(gtemp)<0.00000000001,print(i,j,k),))));
 \\ returns nothing.
 
 
-\\for(i=-5,5,for(j=-5,5,for(k=-5,5,gtemp = G1(i+1/2,j+1/2,k+1/2,1000,2);if(abs(gtemp)<0.00000000001,print(i+1/2,j+1/2,k+1/2),))));
+\\for(i=0,5,for(j=0,5,for(k=0,5,gtemp = G1(i/2,j+1/2,k+1/2,1000,2);if(abs(gtemp)<0.00000000001,print(i,j,k),))));
 \\ returns everything.
 
-\\for(i=-5,5,for(j=-5,5,for(k=-5,5,gtemp = G2(i+1/2,j+1/2,k+1/2,1000,2);if(abs(gtemp)<0.00000000001,print(i+1/2,j+1/2,k+1/2),))));
+\\for(i=0,5,for(j=0,5,for(k=0,5,gtemp = G2(i/2,j+1/2,k+1/2,1000,2);if(abs(gtemp)<0.00000000001,print(i,j,k),))));
 \\ returns everything.
 
-\\for(i=-5,5,for(j=-5,5,for(k=-5,5,gtemp = G3(i+1/2,j+1/2,k+1/2,1000,2);if(abs(gtemp)<0.00000000001,print(i+1/2,j+1/2,k+1/2),))));
+\\for(i=0,5,for(j=0,5,for(k=0,5,gtemp = G3(i/2,j+1/2,k+1/2,1000,2);if(abs(gtemp)<0.00000000001,print(i,j,k),))));
 \\ returns everything.
+
+
+\\for(i=0,5,for(j=0,5,for(k=0,5,gtemp = G1(i/6,j+1/2,k/6,1000,2);if(abs(gtemp)<0.00000000001,print(i,j,k),))));
+\\ returns everything.
+
+\\for(i=0,6,for(j=0,5,for(k=0,6,gtemp = G2(i/6,j+1/2,k/6,1000,2);if(abs(gtemp)<0.00000000001,print(i,j,k),))));
+\\ returns (i,j,3) for all i, j.
+
+\\for(i=0,5,for(j=0,5,for(k=0,5,gtemp = G3(i/6,j+1/2,k/6,1000,2);if(abs(gtemp)<0.00000000001,print(i,j,k),))));
+\\ returns(i,j,3) for all i, j,
 
 
 \\for(i=-5,5,for(j=-5,5,for(k=-5,5,gtemp = G1(i+1/3,j+1/3,k+1/3,1000,2);if(abs(gtemp)<0.00000000001,print(i+1/3,j+1/3,k+1/3),))));
@@ -189,6 +196,16 @@ G3(b1, b2, b3, N, k) = F3(b1, b2, b3, N, k) * K1(b1, b2, b3) * q(C1(b1,b2,b3)*ta
 
 \\for(i=0,5,for(j=0,5,for(k=0,5,gtemp = G3(i/3,j/3,k/3,1000,2);if(abs(gtemp)<0.000000000000000001,print(i,j,k),))));
 \\ returns nothing.
+
+
+\\for(i=0,6,for(j=0,6,for(k=0,6,gtemp = G1(i/6,j/6,k/6,1000,2);if(abs(gtemp)<0.000000000000000001,print(i,j,k),))));
+\\ returns (i,3,k) for all i, k. 
+
+\\for(i=0,6,for(j=0,6,for(k=0,6,gtemp = G2(i/6,j/6,k/6,1000,2);if(abs(gtemp)<0.000000000000000001,print(i,j,k),))));
+\\ returns (i,j,k) with for all i, j, k with j congruent to k mod 6.
+
+\\for(i=0,6,for(j=0,6,for(k=0,6,gtemp = G3(i/6,j/6,k/6,1000,2);if(abs(gtemp)<0.000000000000000001,print(i,j,k),))));
+\\ returns (i,j,3) for all i, j. 
 
 
 G1vec(b1,b2,b3) = vector(KK, k, G1(b1,b2,b3,NN,k));
@@ -326,15 +343,30 @@ KC3(b1, b2, b3, k) = conj(K3(b1,b2,b3)) * q(conj(C3(b1,b2,b3))*tau(0,k)) * K1(b1
 
 H1(b1, b2, b3, N, k) = G1(b1, b2, b3, N, k) * KC2(b1, b2, b3, k) - G2(b1, b2, b3, N, k) * KC1(b1, b2, b3, k);
 H2(b1, b2, b3, N, k) = G2(b1, b2, b3, N, k) * KC3(b1, b2, b3, k) - G3(b1, b2, b3, N, k) * KC2(b1, b2, b3, k);
-H3test(b1, b2, b3, N, k) = G3(b1, b2, b3, N, k) * KC1(b1, b2, b3, k) - G1(b1, b2, b3, N, k) * KC3(b1, b2, b3, k);
+H3(b1, b2, b3, N, k) = G3(b1, b2, b3, N, k) * KC1(b1, b2, b3, k) - G1(b1, b2, b3, N, k) * KC3(b1, b2, b3, k);
 
-H3(b1, b2, b3, N, k) = G3(b1, b2, b3, N, k) * G1K(b1, b2, b3) * q(G1C(b1,b2,b3)*tau(0,k)) - G1(b1, b2, b3, N, k) * G3K(b1, b2, b3) * q(G3C(b1,b2,b3)*tau(0,k));
+\\H3(b1, b2, b3, N, k) = G3(b1, b2, b3, N, k) * G1K(b1, b2, b3) * q(G1C(b1,b2,b3)*tau(0,k)) - G1(b1, b2, b3, N, k) * G3K(b1, b2, b3) * q(G3C(b1,b2,b3)*tau(0,k));
 
 \\for(i=0,5,for(j=0,5,for(k=0,5,gtemp = H3(i/3,j/3,k/3,1000,2);if(abs(gtemp)<0.00000000001,print(i,j,k),))));
 \\ prints (i,j,k) with j congruent to k mod 3.
 
 
+H1vec(b1,b2,b3) = vector(KK, k, H1(b1,b2,b3,NN,k));
+H2vec(b1,b2,b3) = vector(KK, k, H2(b1,b2,b3,NN,k));
 H3vec(b1,b2,b3) = vector(KK, k, H3(b1,b2,b3,NN,k));
+
+
+{
+H1ratio(b1,b2,b3) = 
+  h = H1vec(b1,b2,b3);
+  vector(#h - 1, k, h[k+1]/h[k])
+}
+
+{
+H2ratio(b1,b2,b3) = 
+  h = H2vec(b1,b2,b3);
+  vector(#h - 1, k, h[k+1]/h[k])
+}
 
 {
 H3ratio(b1,b2,b3) = 
@@ -343,21 +375,39 @@ H3ratio(b1,b2,b3) =
 }
 
 \\ (K,r) = (13,12)
+\\ b2, b3 don't have denominator 2 and
+\\ b2, b3 are distinct mod 1.
+H1Vnum(b1,b2,b3,K,r) = log(asympr(H1ratio(b1,b2,b3)[1..K],r)) * tau(0,1) / Pi / 2 * I;
+H2Vnum(b1,b2,b3,K,r) = log(asympr(H2ratio(b1,b2,b3)[1..K],r)) * tau(0,1) / Pi / 2 * I;
 H3Vnum(b1,b2,b3,K,r) = log(asympr(H3ratio(b1,b2,b3)[1..K],r)) * tau(0,1) / Pi / 2 * I;
 
-H3V = 5/24;
+HV = 5/24;
+
+{
+H1Lvec(b1,b2,b3) = 
+  v = H1vec(b1,b2,b3);
+  vector(#v-1, k, log(v[k+1]/v[k]*q(-HV/tau(0,k))/q(-HV/tau(0,k+1)))/log(tau(0,k+1)/tau(0,k)))
+}
+
+{
+H2Lvec(b1,b2,b3) = 
+  v = H2vec(b1,b2,b3);
+  vector(#v-1, k, log(v[k+1]/v[k]*q(-HV/tau(0,k))/q(-HV/tau(0,k+1)))/log(tau(0,k+1)/tau(0,k)))
+}
 
 {
 H3Lvec(b1,b2,b3) = 
   v = H3vec(b1,b2,b3);
-  vector(#v-1, k, log(v[k+1]/v[k]*q(-H3V/tau(0,k))/q(-H3V/tau(0,k+1)))/log(tau(0,k+1)/tau(0,k)))
+  vector(#v-1, k, log(v[k+1]/v[k]*q(-HV/tau(0,k))/q(-HV/tau(0,k+1)))/log(tau(0,k+1)/tau(0,k)))
 }
 
+H1Lnum(b1,b2,b3,K,r) = asympr(H1Lvec(b1,b2,b3)[1..K],r);
+H2Lnum(b1,b2,b3,K,r) = asympr(H2Lvec(b1,b2,b3)[1..K],r);
 H3Lnum(b1,b2,b3,K,r) = asympr(H3Lvec(b1,b2,b3)[1..K],r);
 
-H3matL = vector(3);
-for(n = 1, 3, H3matL[n] = matrix(3));
-for(i = 1, 3, for(j = 1, 3, for(k = 1, 3, H3matL[i][j,k] = bestappr(3 * real(H3Lnum(i+1/3, j+1/3, k+2/3, 13,12)), 10))));
+\\H3matL = vector(3);
+\\for(n = 1, 3, H3matL[n] = matrix(3));
+\\for(i = 1, 3, for(j = 1, 3, for(k = 1, 3, H3matL[i][j,k] = bestappr(3 * real(H3Lnum(i+1/3, j+1/3, k+2/3, 13,12)), 10))));
 
 \\ H3matL takes 2 minutes to compute.
 
@@ -370,28 +420,74 @@ H3Linterp = -x + y + z;
 \\ b1 - 1/3, b2 - 1/3, b3 - 2/3 are integers.
 H3L(b1, b2, b3) =  subst(subst(subst(H3Linterp,x,b1),y,b2),z,b3);
 
+
+\\ b2, b3 don't have denominator 2 and
+\\ b2, b3 are distinct mod 1.
+HL(b1, b2, b3) = -b1 + b2 + b3;
+
+
+{
+H1Kvec(b1,b2,b3) = 
+v = H1vec(b1,b2,b3);
+vector(#v, k, v[k] / q(-HV/tau(0,k)) / (-2*Pi*I*tau(0,k))^HL(b1,b2,b3))
+}
+
+{
+H2Kvec(b1,b2,b3) = 
+v = H2vec(b1,b2,b3);
+vector(#v, k, v[k] / q(-HV/tau(0,k)) / (-2*Pi*I*tau(0,k))^HL(b1,b2,b3))
+}
+
 {
 H3Kvec(b1,b2,b3) = 
 v = H3vec(b1,b2,b3);
-vector(#v, k, v[k] / q(-H3V/tau(0,k)) / (-2*Pi*I*tau(0,k))^H3L(b1,b2,b3))
+vector(#v, k, v[k] / q(-HV/tau(0,k)) / (-2*Pi*I*tau(0,k))^HL(b1,b2,b3))
 }
 
 
+H1Knum(b1,b2,b3,K,r) = asympr(H1Kvec(b1,b2,b3)[1..K],r);
+H2Knum(b1,b2,b3,K,r) = asympr(H2Kvec(b1,b2,b3)[1..K],r);
 H3Knum(b1,b2,b3,K,r) = asympr(H3Kvec(b1,b2,b3)[1..K],r);
+
+h1v = vector(5);
+h2v = vector(5);
+h3v = vector(5);
+for(n=1,5, h1v[n] = abs(H1Knum(-n,1/3,2/3,13,12) * gamma(n+1)/gamma(2*(n+1))*sqrt(2)/sqrt(3)^n*3));
+for(n=1,5, h2v[n] = abs(H2Knum(-n,1/3,2/3,13,12) * gamma(n+1)/gamma(2*(n+1))*sqrt(2)/sqrt(3)^n*3));
+for(n=1,5, h3v[n] = abs(H3Knum(-n,1/3,2/3,13,12) * gamma(n+1)/gamma(2*(n+1))*sqrt(2)/sqrt(3)^n*3));
+
 
 H3Kmag(b1,b2,b3,K,r) = H3Knum(b1,b2,b3,K,r)/exp(Pi*I/18*(-5-15*(b1-1/3+b2-1/3+b3-2/3)));
 
 
 \\ b1 - 1/3, b2 - 1/3, b3 - 2/3 are integers.
+H1K(b1,b2,b3) = (-1)^(b2-1/3)*exp(Pi*I/6)*exp(Pi*I/18*(-5-15*(b1-1/3+b2-1/3+b3-2/3))) / sqrt(2) / 3 / 2^(b2+b3-b1) * sqrt(3)^(b2+b3-b1-1) * gamma(2*(b2+b3-b1))/gamma(b2+b3-b1)/2^(b2+b3-b1-1);
+
+H2K(b1,b2,b3) = (-1)^(b3-2/3)*exp(-Pi*I/6)*exp(Pi*I/18*(-5-15*(b1-1/3+b2-1/3+b3-2/3))) / sqrt(2) / 3 / 2^(b2+b3-b1) * sqrt(3)^(b2+b3-b1-1) * gamma(2*(b2+b3-b1))/gamma(b2+b3-b1)/2^(b2+b3-b1-1);
+
 H3K(b1,b2,b3) = exp(Pi*I/18*(-5-15*(b1-1/3+b2-1/3+b3-2/3))) / sqrt(2) / 3 / 2^(b2+b3-b1) * sqrt(3)^(b2+b3-b1-1) * gamma(2*(b2+b3-b1))/gamma(b2+b3-b1)/2^(b2+b3-b1-1);
 
+{
+H1Cvec(b1,b2,b3) = 
+v = H1vec(b1,b2,b3);
+vector(#v, k, log(v[k]/q(-HV/tau(0,k)) / (-2 * Pi * I * tau(0,k))^HL(b1,b2,b3) / H1K(b1,b2,b3)) / (2 * Pi * I * tau(0,k)))
+}
+
+{
+H2Cvec(b1,b2,b3) = 
+v = H2vec(b1,b2,b3);
+vector(#v, k, log(v[k]/q(-HV/tau(0,k)) / (-2 * Pi * I * tau(0,k))^HL(b1,b2,b3) / H2K(b1,b2,b3)) / (2 * Pi * I * tau(0,k)))
+}
 
 {
 H3Cvec(b1,b2,b3) = 
 v = H3vec(b1,b2,b3);
-vector(#v, k, log(v[k]/q(-H3V/tau(0,k)) / (-2 * Pi * I * tau(0,k))^H3L(b1,b2,b3) / H3K(b1,b2,b3)) / (2 * Pi * I * tau(0,k)))
+vector(#v, k, log(v[k]/q(-HV/tau(0,k)) / (-2 * Pi * I * tau(0,k))^HL(b1,b2,b3) / H3K(b1,b2,b3)) / (2 * Pi * I * tau(0,k)))
 }
 
+
+H1Cnum(b1,b2,b3,K,r) = asympr(H1Cvec(b1,b2,b3)[1..K],r);
+H2Cnum(b1,b2,b3,K,r) = asympr(H2Cvec(b1,b2,b3)[1..K],r);
 H3Cnum(b1,b2,b3,K,r) = asympr(H3Cvec(b1,b2,b3)[1..K],r);
 
 {
@@ -402,7 +498,7 @@ exact(x) =
 
 {
 symb(x) = 
-  vec = lindep([x,1,exp(Pi*I/3)], 20);
+  vec = lindep([x,1,exp(Pi*I/3)], 10);
   -vec[2]/vec[1] - vec[3]/vec[1] * Z
 }
 
@@ -457,12 +553,49 @@ interp3d(vmat) =
 
 
 \p 100;
-NN = 3500;
+NN = 4000;
 KK = 21;
 
-H3mat1 = vector(4);
-for(n = 1, 4, H3mat1[n] = matrix(4));
-for(i = 1, 4, for(j = 1, 4, for(k = 1, 4, H3mat1[i][j,k] = symb(1296 * H3Cnum(i+1/3, j+1/3, k+2/3, 18,17)))));
+\\H1mat1 = vector(4);
+\\for(n = 1, 4, H1mat1[n] = matrix(4));
+\\for(i = 1, 4, for(j = 1, 4, for(k = 1, 4, H1mat1[i][j,k] = symb(1296 * H1Cnum(i+1/3, j+1/3, k+2/3, 20,19)))));
+
+\\ H1mat1 takes  15 minutes to compute.
+
+H1mat1 = [[518*Z - 703, 1910*Z - 3739, 4310*Z - 9871, 7718*Z - 19099; 1478*Z - 5899, 2582*Z - 8143, 4694*Z - 13483, 7814*Z - 21919; 3446*Z - 18079, 4262*Z - 19531, 6086*Z - 24079, 8918*Z - 31723; 6422*Z - 37243, 6950*Z - 37903, 8486*Z - 41659, 11030*Z - 48511], [350*Z - 1123, 1598*Z - 3655, 3854*Z - 9283, 7118*Z - 18007; 1166*Z - 4519, 2126*Z - 6259, 4094*Z - 11095, 7070*Z - 19027; 2990*Z - 14899, 3662*Z - 15847, 5342*Z - 19891, 8030*Z - 27031; 5822*Z - 32263, 6206*Z - 32419, 7598*Z - 35671, 9998*Z - 42019], [326*Z - 2479, 1430*Z - 4507, 3542*Z - 9631, 6662*Z - 17851; 998*Z - 4075, 1814*Z - 5311, 3638*Z - 9643, 6470*Z - 17071; 2678*Z - 12655, 3206*Z - 13099, 4742*Z - 16639, 7286*Z - 23275; 5366*Z - 28219, 5606*Z - 27871, 6854*Z - 30619, 9110*Z - 36463], [446*Z - 4771, 1406*Z - 6295, 3374*Z - 10915, 6350*Z - 18631; 974*Z - 4567, 1646*Z - 5299, 3326*Z - 9127, 6014*Z - 16051; 2510*Z - 11347, 2894*Z - 11287, 4286*Z - 14323, 6686*Z - 20455; 5054*Z - 25111, 5150*Z - 24259, 6254*Z - 26503, 8366*Z - 31843]];
+
+H1Cinterp = 1/1296 * subst(subst(subst(interp3d(H1mat1), x, x-1/3), y, y-1/3), z, z-2/3);
+
+H1Cinterp = (1/18*Z - 13/36)*x^2 + ((-1/9*Z + 25/18)*y + ((-1/9*Z + 7/18)*z - 3/2))*x + ((7/18*Z - 97/36)*y^2 + ((-2/9*Z + 11/18)*z + (-1/6*Z + 3))*y + ((7/18*Z - 43/36)*z^2 + (-1/6*Z + 3/2)*z + (-7/216*Z - 425/432)));
+
+\\ b1 - 1/3, b2 - 1/3, b3 - 2/3 are integers.
+H1C(b1, b2, b3) =  subst(subst(subst(subst(H1Cinterp,x,b1),y,b2),z,b3), Z, exp(Pi*I/3));
+
+
+
+
+\\H2mat1 = vector(4);
+\\for(n = 1, 4, H2mat1[n] = matrix(4));
+\\for(i = 1, 4, for(j = 1, 4, for(k = 1, 4, H2mat1[i][j,k] = symb(1296 * H2Cnum(i+1/3, j+1/3, k+2/3, 20,19)))));
+
+\\ H2mat1 takes  15 minutes to compute.
+
+H2mat1 = [[518*Z - 1423, 1910*Z - 9211, 4310*Z - 23983, 7718*Z - 45739; 1478*Z - 3163, 2582*Z - 10159, 4694*Z - 24139, 7814*Z - 45103; 3446*Z - 7999, 4262*Z - 14203, 6086*Z - 27391, 8918*Z - 47563; 6422*Z - 15931, 6950*Z - 21343, 8486*Z - 33739, 11030*Z - 53119], [350*Z - 1411, 1598*Z - 7399, 3854*Z - 20371, 7118*Z - 40327; 1166*Z - 2647, 2126*Z - 7843, 4094*Z - 20023, 7070*Z - 39187; 2990*Z - 6979, 3662*Z - 11383, 5342*Z - 22771, 8030*Z - 41143; 5822*Z - 14407, 6206*Z - 18019, 7598*Z - 28615, 9998*Z - 46195], [326*Z - 2335, 1430*Z - 6523, 3542*Z - 17695, 6662*Z - 35851; 998*Z - 3067, 1814*Z - 6463, 3638*Z - 16843, 6470*Z - 34207; 2678*Z - 6895, 3206*Z - 9499, 4742*Z - 19087, 7286*Z - 35659; 5366*Z - 13819, 5606*Z - 15631, 6854*Z - 24427, 9110*Z - 40207], [446*Z - 4195, 1406*Z - 6583, 3374*Z - 15955, 6350*Z - 32311; 974*Z - 4423, 1646*Z - 6019, 3326*Z - 14599, 6014*Z - 30163; 2510*Z - 7747, 2894*Z - 8551, 4286*Z - 16339, 6686*Z - 31111; 5054*Z - 14167, 5150*Z - 14179, 6254*Z - 21175, 8366*Z - 35155]];
+
+H2Cinterp = 1/1296 * subst(subst(subst(interp3d(H2mat1), x, x-1/3), y, y-1/3), z, z-2/3);
+
+H2Cinterp = (1/18*Z - 13/36)*x^2 + ((-1/9*Z + 7/18)*y + ((-1/9*Z + 25/18)*z - 3/2))*x + ((7/18*Z - 43/36)*y^2 + ((-2/9*Z + 11/18)*z + (-1/6*Z + 3/2))*y + ((7/18*Z - 97/36)*z^2 + (-1/6*Z + 3)*z + (-7/216*Z - 425/432)));
+
+\\ b1 - 1/3, b2 - 1/3, b3 - 2/3 are integers.
+H2C(b1, b2, b3) =  subst(subst(subst(subst(H2Cinterp,x,b1),y,b2),z,b3), Z, exp(Pi*I/3));
+
+
+
+
+
+\\H3mat1 = vector(4);
+\\for(n = 1, 4, H3mat1[n] = matrix(4));
+\\for(i = 1, 4, for(j = 1, 4, for(k = 1, 4, H3mat1[i][j,k] = symb(1296 * H3Cnum(i+1/3, j+1/3, k+2/3, 20,19)))));
 
 \\ H3mat1 takes  15 minutes to compute.
 
@@ -477,15 +610,30 @@ H3C(b1, b2, b3) =  subst(subst(subst(subst(H3Cinterp,x,b1),y,b2),z,b3), Z, exp(P
 
 
 {
+H1S2vec(b1, b2, b3) = 
+v = H1vec(b1, b2, b3);
+vector(#v,k, (log(v[k]/q(-HV/tau(0,k)) / (-2 * Pi * I * tau(0,k))^HL(b1,b2,b3) / H1K(b1,b2,b3)) - H1C(b1,b2,b3) * (2 * Pi * I * tau(0,k))) / (2 * Pi * I * tau(0,k))^2)
+}
+
+{
+H2S2vec(b1, b2, b3) = 
+v = H2vec(b1, b2, b3);
+vector(#v,k, (log(v[k]/q(-HV/tau(0,k)) / (-2 * Pi * I * tau(0,k))^HL(b1,b2,b3) / H2K(b1,b2,b3)) - H2C(b1,b2,b3) * (2 * Pi * I * tau(0,k))) / (2 * Pi * I * tau(0,k))^2)
+}
+
+{
 H3S2vec(b1, b2, b3) = 
 v = H3vec(b1, b2, b3);
-vector(#v,k, (log(v[k]/q(-H3V/tau(0,k)) / (-2 * Pi * I * tau(0,k))^H3L(b1,b2,b3) / H3K(b1,b2,b3)) - H3C(b1,b2,b3) * (2 * Pi * I * tau(0,k))) / (2 * Pi * I * tau(0,k))^2)
+vector(#v,k, (log(v[k]/q(-HV/tau(0,k)) / (-2 * Pi * I * tau(0,k))^H3L(b1,b2,b3) / H3K(b1,b2,b3)) - H3C(b1,b2,b3) * (2 * Pi * I * tau(0,k))) / (2 * Pi * I * tau(0,k))^2)
 }
 
 NN = 4000;
 
 \\ (K,r) = (20,19).
+H1S2num(b1, b2, b3, K, r) = asympr(H1S2vec(b1, b2, b3)[1..K], r);
+H2S2num(b1, b2, b3, K, r) = asympr(H2S2vec(b1, b2, b3)[1..K], r);
 H3S2num(b1, b2, b3, K, r) = asympr(H3S2vec(b1, b2, b3)[1..K], r);
+\\ H1S2 = H2S2 = H3S2.
 
 \\ H3mat2 takes 40 minutes to compute.
 \\H3mat2 = vector(5);
@@ -505,398 +653,10 @@ H3S2(b1,b2,b3) = subst(subst(subst(H3S2interp,x,b1),y,b2),z,b3);
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-\p 100;
-KK = 21;
-NN = 2000;
-
-H1vec(b1,b2,b3) = vector(KK, k, H1(b1,b2,b3,NN,k));
-H2vec(b1,b2,b3) = vector(KK, k, H2(b1,b2,b3,NN,k));
-H3vec(b1,b2,b3) = vector(KK, k, H3(b1,b2,b3,NN,k));
-
-\\H1vec(b,1/2,1/2) = H2vec(b,1/2,1/2) = H3vec(b,1/2,1/2) = 0.
-
-{
-H1ratio(b1,b2,b3) = 
-  h = H1vec(b1,b2,b3);
-  vector(#h - 1, k, h[k+1]/h[k])
-}
-
-{
-H2ratio(b1,b2,b3) = 
-  h = H2vec(b1,b2,b3);
-  vector(#h - 1, k, h[k+1]/h[k])
-}
-
-{
-H3ratio(b1,b2,b3) = 
-  h = H3vec(b1,b2,b3);
-  vector(#h - 1, k, h[k+1]/h[k])
-}
-
-\\ (K,r) = (20,13)
-H1Vnum(b1,b2,b3,K,r) = log(asympr(H1ratio(b1,b2,b3)[1..K],r)) * tau(0,1) / Pi / 2 * I;
-H2Vnum(b1,b2,b3,K,r) = log(asympr(H2ratio(b1,b2,b3)[1..K],r)) * tau(0,1) / Pi / 2 * I;
-H3Vnum(b1,b2,b3,K,r) = log(asympr(H3ratio(b1,b2,b3)[1..K],r)) * tau(0,1) / Pi / 2 * I;
-
-HV = 1/24;
-
-{
-H1Lvec(b1,b2,b3) = 
-  v = H1vec(b1,b2,b3);
-  vector(#v-1, k, log(v[k+1]/v[k]*q(-HV/tau(0,k))/q(-HV/tau(0,k+1)))/log(tau(0,k+1)/tau(0,k)))
-}
-
-{
-H2Lvec(b1,b2,b3) = 
-  v = H2vec(b1,b2,b3);
-  vector(#v-1, k, log(v[k+1]/v[k]*q(-HV/tau(0,k))/q(-HV/tau(0,k+1)))/log(tau(0,k+1)/tau(0,k)))
-}
-
-{
-H3Lvec(b1,b2,b3) = 
-  v = H3vec(b1,b2,b3);
-  vector(#v-1, k, log(v[k+1]/v[k]*q(-HV/tau(0,k))/q(-HV/tau(0,k+1)))/log(tau(0,k+1)/tau(0,k)))
-}
-
-H1Lnum(b1,b2,b3,K,r) = asympr(H1Lvec(b1,b2,b3)[1..K],r);
-H2Lnum(b1,b2,b3,K,r) = asympr(H2Lvec(b1,b2,b3)[1..K],r);
-H3Lnum(b1,b2,b3,K,r) = asympr(H3Lvec(b1,b2,b3)[1..K],r);
-
-HL = 1;
-
-
-
-{
-H1Kvec(b1,b2,b3,c) = 
-v = H1vec(b1,b2,b3);
-vector(#v, k, v[k] / q(-HV/tau(0,k)) / (-2*Pi*I*tau(0,k))^c)
-}
-
-H1Knum(b1,b2,b3,c,K,r) = asympr(H1Kvec(b1,b2,b3,c)[1..K],r);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-{
-G10(R) = 
-g = G1vec(R);
-vector(#g, k, g[k]/q(-GC/tau(0,k)))
-}
-
-{
-G20(R) = 
-g = G2vec(R);
-vector(#g, k, g[k]/q(-GC/tau(0,k)))
-}
-
-{
-G30(R) = 
-g = G3vec(R);
-vector(#g, k, g[k]/q(-GC/tau(0,k)))
-}
-
-G1Knum(R,K,r) = asympr(G10(R)[1..K],r);
-G2Knum(R,K,r) = asympr(G20(R)[1..K],r);
-G3Knum(R,K,r) = asympr(G30(R)[1..K],r);
-
-G1K(R) = -1/sqrt(3^R)*exp((-R+1)*Pi*I/6);
-G2K(R) = -1/sqrt(3^R)*exp((-R-1)*Pi*I/6);
-G3K(R) = G2K(R);
-
-{
-G11(R) = 
-g = G1vec(R);
-vector(#g, k, log(g[k]/q(-GC/tau(0,k)) / G1K(R)) / (2 * Pi * I * tau(0,k)))
-}
-
-{
-G21(R) = 
-g = G2vec(R);
-vector(#g, k, log(g[k]/q(-GC/tau(0,k)) / G2K(R)) / (2 * Pi * I * tau(0,k)))
-}
-
-{
-G31(R) = 
-g = G3vec(R);
-vector(#g, k, log(g[k]/q(-GC/tau(0,k)) / G3K(R)) / (2 * Pi * I * tau(0,k)))
-}
-
-G1S1num(R,K,r) = asympr(G11(R)[1..K], r);
-G2S1num(R,K,r) = asympr(G21(R)[1..K], r);
-G3S1num(R,K,r) = asympr(G31(R)[1..K], r);
-
-G1S1(R) = 1/432*(15-36*R^2 +(1-12*R^2)*sqrt(-3));
-G2S1(R) = G1S1(R);
-G3S1(R) = 1/432*(-57-144*R-36*R^2 +(1-12*R^2)*sqrt(-3));
-
-\p 100;
-K1=20;
-N1=3000;
-
-{
-G12(R) = 
-  g = G1vec(R);
-  vector(#g,k, (log(g[k]/q(-GC/tau(0,k)) / G1K(R)) - G1S1(R) * (2 * Pi * I * tau(0,k)))/ (2 * Pi * I * tau(0,k))^2)
-}
-
-{
-G22(R) = 
-  g = G2vec(R);
-  vector(#g,k, (log(g[k]/q(-GC/tau(0,k)) / G2K(R)) - G2S1(R) * (2 * Pi * I * tau(0,k)))/ (2 * Pi * I * tau(0,k))^2)
-}
-
-{
-G32(R) = 
-  g = G3vec(R);
-  vector(#g,k, (log(g[k]/q(-GC/tau(0,k)) / G3K(R)) - G3S1(R) * (2 * Pi * I * tau(0,k)))/ (2 * Pi * I * tau(0,k))^2)
-}
-
-
-G1S2num(R,K,r) = asympr(G12(R)[1..K], r);
-G2S2num(R,K,r) = asympr(G22(R)[1..K], r);
-G3S2num(R,K,r) = asympr(G32(R)[1..K], r);
-
-\\ G1S2 = G2S2 = G3S2
-
-
-
-
-J1(R,N,k) = G1K(R)/G2K(R) * q((G1S1(R)-G2S1(R))*tau(0,k)) * G2(R,N,k) - G1(R,N,k);
-J2(R,N,k) = G1K(R)/G3K(R) * q((G1S1(R)-G3S1(R))*tau(0,k)) * G3(R,N,k) - G1(R,N,k);
-J3(R,N,k) = G2K(R)/G3K(R) * q((G2S1(R)-G3S1(R))*tau(0,k)) * G3(R,N,k) - G2(R,N,k);
-
-\\ J2 = J3?
-
-J1vec(R) = vector(K1, k, J1(R,N1,k));
-J2vec(R) = vector(K1, k, J2(R,N1,k));
-J3vec(R) = vector(K1, k, J3(R,N1,k));
-
-{
-J1ratio(R) = 
-  j =J1vec(R);
-  vector(#j - 1, k, j[k+1]/j[k])
-}
-
-{
-J2ratio(R) = 
-  j =J2vec(R);
-  vector(#j - 1, k, j[k+1]/j[k])
-}
-
-{
-J3ratio(R) = 
-  j =J3vec(R);
-  vector(#j - 1, k, j[k+1]/j[k])
-}
-
-J1Cnum(R,K,r) = log(asympr(J1ratio(R)[1..K], r)) * tau(0,1) / Pi / 2 * I;
-J2Cnum(R,K,r) = log(asympr(J2ratio(R)[1..K], r)) * tau(0,1) / Pi / 2 * I;
-J3Cnum(R,K,r) = log(asympr(J3ratio(R)[1..K], r)) * tau(0,1) / Pi / 2 * I;
-
-JC = 5/24;
-
-{
-J1Lvec(R) = 
-  j = J1vec(R);
-  vector(#j-1, k, log(j[k+1]/j[k]*q(-JC/tau(0,k))/q(-JC/tau(0,k+1)))/log(tau(0,k+1)/tau(0,k)))
-}
-
-{
-J2Lvec(R) = 
-  j = J2vec(R);
-  vector(#j-1, k, log(j[k+1]/j[k]*q(-JC/tau(0,k))/q(-JC/tau(0,k+1)))/log(tau(0,k+1)/tau(0,k)))
-}
-
-{
-J3Lvec(R) = 
-  j = J3vec(R);
-  vector(#j-1, k, log(j[k+1]/j[k]*q(-JC/tau(0,k))/q(-JC/tau(0,k+1)))/log(tau(0,k+1)/tau(0,k)))
-}
-
-J1Lnum(R,K,r) = asympr(J1Lvec(R)[1..K],r);
-J2Lnum(R,K,r) = asympr(J2Lvec(R)[1..K],r);
-J3Lnum(R,K,r) = asympr(J3Lvec(R)[1..K],r);
-
-{
-J10(R) = 
-  j = J1vec(R);
-  vector(#j, k, j[k]/q(-JC/tau(0,k))/ (-2 * Pi * I * tau(0,k))^(-R))
-}
-
-{
-J20(R) = 
-  j = J2vec(R);
-  vector(#j, k, j[k]/q(-JC/tau(0,k))/ (-2 * Pi * I * tau(0,k))^(-R))
-}
-
-{
-J30(R) = 
-  j = J3vec(R);
-  vector(#j, k, j[k]/q(-JC/tau(0,k))/ (-2 * Pi * I * tau(0,k))^(-R))
-}
-
-J1Knum(R,K,r) = asympr(J10(R)[1..K],r);
-J2Knum(R,K,r) = asympr(J20(R)[1..K],r);
-J3Knum(R,K,r) = asympr(J30(R)[1..K],r);
-
-J1K(R) = exp(-Pi*I/3)*sqrt(3/2)*12^R*gamma(R)/gamma(2*R);
-J2K(R) = sqrt(3/2)*12^R*gamma(R)/gamma(2*R);
-J3K(R) = J2K(R);
-
-{
-J11(R) = 
-  j = J1vec(R);
-  vector(#j,k, log(j[k]/q(-JC/tau(0,k)) / (-2 * Pi * I * tau(0,k))^(-R)/ J1K(R)) / (2 * Pi * I * tau(0,k)))
-}
-
-{
-J21(R) = 
-  j = J2vec(R);
-  vector(#j,k, log(j[k]/q(-JC/tau(0,k)) / (-2 * Pi * I * tau(0,k))^(-R)/ J2K(R)) / (2 * Pi * I * tau(0,k)))
-}
-
-{
-J31(R) = 
-  j = J3vec(R);
-  vector(#j,k, log(j[k]/q(-JC/tau(0,k)) / (-2 * Pi * I * tau(0,k))^(-R)/ J3K(R)) / (2 * Pi * I * tau(0,k)))
-}
-
-J1S1num(R,K,r) = asympr(J11(R)[1..K], r);
-J2S1num(R,K,r) = asympr(J21(R)[1..K], r);
-J3S1num(R,K,r) = asympr(J31(R)[1..K], r);
-
-JS1(R) = 1/144*(5-12*R^2);
-
-
-H(R,N,k) = F1(R,N,k) - q((1/3*R+1/6)*tau(0,k))*F2(R,N,k) + q((2/3*R+2/3)*tau(0,k))*F3(R,N,k);
-
-\\ H = J2 = J3 = exp(Pi*I/3)*J1
-
-
-Hvec(R) = vector(K1, k, H(R,N1,k));
-
-{
-Hratio(R) = 
-  h = Hvec(R);
-  vector(#h - 1, k, h[k+1]/h[k])
-}
-
-\p 100;
-K1=20;
-N1=3000;
-
-HCnum(R,K,r) = log(asympr(Hratio(R)[1..K], r)) * tau(0,1) / Pi / 2 * I;
-\\ HCnum(R,15,14) = 0.20833333333333338266 - E-67*I 
-\\ takes 10 seconds to compute.
-
-HC = 5/24;
-
-{
-H0(R) = 
-  h = Hvec(R);
-  vector(#h, k, h[k]/q(-HC/tau(0,k))/ sqrt(-2 * Pi * I * tau(0,k))^(-2*R))
-}
-
-HKnum(R,K,r) = asympr(H0(R)[1..K],r);
-\\ the function HK(R) is defined for R > 0.
-HK(R) = sqrt(3/2) * 12^R * gamma(R)/gamma(2*R);
-
-{
-H1(R) = 
-  h = Hvec(R);
-  vector(#h,k, log(h[k]/q(-HC/tau(0,k)) / sqrt(-2 * Pi * I * tau(0,k))^(-2*R)/ HK(R)) / (2 * Pi * I * tau(0,k)))
-}
-
-HS1num(R,K,r) = asympr(H1(R)[1..K], r);
-HS1(R) = 1/144*(5-12*R^2);
-
-{
-H2(R) = 
-  h = Hvec(R);
-  vector(#h,k, (log(h[k]/q(-HC/tau(0,k)) / sqrt(-2 * Pi * I * tau(0,k))^(-2*R)/ HK(R)) - HS1(R) * (2 * Pi * I * tau(0,k)))/ (2 * Pi * I * tau(0,k))^2)
-}
-
-HS2num(R,K,r) = asympr(H2(R)[1..K], r);
-HS2(R) = 1/72^2*(2*R-8*R^3);
-
-{
-H3(R) = 
-  h = Hvec(R);
-  vector(#h,k, (log(h[k]/q(-HC/tau(0,k)) / sqrt(-2 * Pi * I * tau(0,k))^(-2*R)/ HK(R)) - HS1(R) * (2 * Pi * I * tau(0,k)) - HS2(R) * (2 * Pi * I * tau(0,k))^2)/ (2 * Pi * I * tau(0,k))^3)
-}
-
-HS3num(R,K,r) = asympr(H3(R)[1..K], r);
-HS3 = 0;
-
-{
-H4(R) = 
-  h = Hvec(R);
-  vector(#h,k, (log(h[k]/q(-HC/tau(0,k)) / sqrt(-2 * Pi * I * tau(0,k))^(-2*R)/ HK(R)) - HS1(R) * (2 * Pi * I * tau(0,k)) - HS2(R) * (2 * Pi * I * tau(0,k))^2)/ (2 * Pi * I * tau(0,k))^4)
-}
-
-HS4num(R,K,r) = asympr(H4(R)[1..K], r);
-HS4(R) = 1/72^4/5^2*(84*R-480*R^3+576*R^5);
-
-{
-H5(R) = 
-  h = Hvec(R);
-  vector(#h,k, (log(h[k]/q(-HC/tau(0,k)) / sqrt(-2 * Pi * I * tau(0,k))^(-2*R)/ HK(R)) - HS1(R) * (2 * Pi * I * tau(0,k)) - HS2(R) * (2 * Pi * I * tau(0,k))^2 - HS4(R) * (2 * Pi * I * tau(0,k))^4)/ (2 * Pi * I * tau(0,k))^5)
-}
-
-HS5num(R,K,r) = asympr(H5(R)[1..K], r);
-HS5 = 0;
-
-{
-H6(R) = 
-  h = Hvec(R);
-  vector(#h,k, (log(h[k]/q(-HC/tau(0,k)) / sqrt(-2 * Pi * I * tau(0,k))^(-2*R)/ HK(R)) - HS1(R) * (2 * Pi * I * tau(0,k)) - HS2(R) * (2 * Pi * I * tau(0,k))^2 - HS4(R) * (2 * Pi * I * tau(0,k))^4)/ (2 * Pi * I * tau(0,k))^6)
-}
-
-HS6num(R,K,r) = asympr(H6(R)[1..K], r);
-HS6(R) = 1/72^6/5/7^2*(5952*R-37632*R^3+64512*R^5-36864*R^7);
-
-{
-H7(R) = 
-  h = Hvec(R);
-  vector(#h,k, (log(h[k]/q(-HC/tau(0,k)) / sqrt(-2 * Pi * I * tau(0,k))^(-2*R)/ HK(R)) - HS1(R) * (2 * Pi * I * tau(0,k)) - HS2(R) * (2 * Pi * I * tau(0,k))^2 - HS4(R) * (2 * Pi * I * tau(0,k))^4 - HS6(R) * (2 * Pi * I * tau(0,k))^6)/ (2 * Pi * I * tau(0,k))^7)
-}
-
-HS7num(R,K,r) = asympr(H7(R)[1..K], r);
-HS7(R) = 0;
-
-{
-H8(R) = 
-  h = Hvec(R);
-  vector(#h,k, (log(h[k]/q(-HC/tau(0,k)) / sqrt(-2 * Pi * I * tau(0,k))^(-2*R)/ HK(R)) - HS1(R) * (2 * Pi * I * tau(0,k)) - HS2(R) * (2 * Pi * I * tau(0,k))^2 - HS4(R) * (2 * Pi * I * tau(0,k))^4 - HS6(R) * (2 * Pi * I * tau(0,k))^6)/ (2 * Pi * I * tau(0,k))^8)
-}
-
-HS8num(R,K,r) = asympr(H8(R)[1..K], r);
-HS8(R) = 1/72^8/5^3/7*(329184*R-2142720*R^3+4064256*R^5-3317760*R^7+1105920*R^9);
+\\ b1 - 1/3, b2 - 1/3, b3 - 2/3 are integers.
+J1(b1, b2, b3, N, k) = H1(b1, b2, b3, N, k) * H2K(b1, b2, b3) * q(H2C(b1,b2,b3)*tau(0,k)) - H2(b1, b2, b3, N, k) * H1K(b1, b2, b3)* q(H1C(b1,b2,b3)*tau(0,k));
+J2(b1, b2, b3, N, k) = H2(b1, b2, b3, N, k) * H3K(b1, b2, b3) * q(H3C(b1,b2,b3)*tau(0,k)) - H3(b1, b2, b3, N, k) * H2K(b1, b2, b3)* q(H2C(b1,b2,b3)*tau(0,k));
+J3(b1, b2, b3, N, k) = H3(b1, b2, b3, N, k) * H1K(b1, b2, b3) * q(H1C(b1,b2,b3)*tau(0,k)) - H1(b1, b2, b3, N, k) * H3K(b1, b2, b3)* q(H3C(b1,b2,b3)*tau(0,k));
+\\ J1 = J2 = J3 = 0
 
 
